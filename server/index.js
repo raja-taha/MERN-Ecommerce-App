@@ -10,18 +10,23 @@ const app = express();
 
 dotenv.config();
 
-// CORS configuration
-const corsOptions = {
-  origin: "https://mern-ecommerce-app-lake.vercel.app", // Allow this origin
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-};
+/// CORS configuration to allow all origins
+app.use(
+  cors({
+    origin: "*", // Allows all origins
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Allow credentials (optional, can be set to false if not needed)
+  })
+);
 
-app.use(cors(corsOptions));
+// Handling preflight requests
+app.options("*", cors()); // Enable pre-flight across-the-board
 
-// Additional server setup
-app.options("*", cors(corsOptions)); // Pre-flight options request
+// Your routes and server setup
+app.get("/", (req, res) => {
+  res.send("CORS is enabled for all origins!");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
