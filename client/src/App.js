@@ -29,7 +29,7 @@ const App = () => {
     }
     const storedRole = localStorage.getItem("role");
     if (storedRole) {
-      dispatch(setRole(JSON.parse(storedRole)));
+      dispatch(setRole(storedRole));
     }
   }, [dispatch]);
   return (
