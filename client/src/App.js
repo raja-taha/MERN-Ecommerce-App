@@ -13,7 +13,7 @@ import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 
 import { useDispatch } from "react-redux";
-import { setUser } from "./features/auth/authSlice";
+import { setUser, setRole } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import Unauthorized from "./pages/Unauthorized";
 import UserRoutes from "./routes/UserRoutes";
@@ -26,6 +26,10 @@ const App = () => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       dispatch(setUser(JSON.parse(storedUser)));
+    }
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      dispatch(setRole(JSON.parse(storedRole)));
     }
   }, [dispatch]);
   return (
