@@ -9,14 +9,20 @@ const productRoutes = require("./routes/productRoutes");
 const app = express();
 
 dotenv.config();
-// Allow cross-origin requests
-app.use(
-  cors({
-    origin: "https://mern-ecommerce-app-lake.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true, // If you need to include cookies or other credentials in requests
-  })
-);
+
+// CORS configuration
+const corsOptions = {
+  origin: "https://mern-ecommerce-app-lake.vercel.app", // Allow this origin
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
+
+// Additional server setup
+app.options("*", cors(corsOptions)); // Pre-flight options request
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
