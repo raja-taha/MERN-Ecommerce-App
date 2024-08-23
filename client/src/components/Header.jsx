@@ -53,15 +53,12 @@ const Header = () => {
           >
             Exclusive
           </Link>
-          <nav className="font-poppins text-[16px] space-x-6">
+          <nav className="font-poppins text-[16px] space-x-10">
             <Link to={"/"}>Home</Link>
             <Link to={"/contact"}>Contact</Link>
             <Link to={"/about"}>About</Link>
-            {user ? (
-              <Link to={"/shop"}>Shop</Link>
-            ) : (
-              <Link to={"/login"}>Login</Link>
-            )}
+            <Link to={"/shop"}>Shop</Link>
+            {!user && <Link to={"/login"}>Login</Link>}
           </nav>
           <div className="flex space-x-3 items-center">
             <form className="bg-secondary flex items-center py-2 px-3 rounded-sm">
