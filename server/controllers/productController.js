@@ -46,6 +46,56 @@ const getProducts = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    // Validate the query parameter
+    if (!query || query.trim() === "") {
+      return res
+        .status(400)
+        .json({ message: "Query parameter is required and cannot be empty" });
+    }
+
+    // Search for products with a case-insensitive regex
+    const products = await Product.find({
+      name: { $regex: new RegExp(query, "i") }, // Using RegExp constructor
+    }).populate("category"); // Populate if needed
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: "No products found" });
+    }
+
+    res.status(200).json(products);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to retrieve products", error: err.message });
+  }
+};
+
+// Get products by category ID
+const getProductsByCategoryId = async (req, res) => {
+  const { categoryId } = req.params; // Get the category ID from the request parameters
+
+  try {
+    // Find products where the category field matches the category ID
+    const products = await Product.find({ category: categoryId }).populate(
+      "category"
+    );
+    res.status(200).json(products);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to retrieve products", error: error.message });
+  }
+};
+
+module.exports = {
+  getProductsByCategoryId,
+};
+
 // Get a single product by ID
 const getProductById = async (req, res) => {
   try {
@@ -127,4 +177,6 @@ module.exports = {
   getProductById,
   updateProduct,
   deleteProduct,
+  getProductsByCategoryId,
+  searchProducts,
 };

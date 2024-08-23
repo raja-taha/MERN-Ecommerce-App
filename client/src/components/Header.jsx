@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import cart from "../assets/cartIcon.png";
 import account from "../assets/userIcon.png";
@@ -8,21 +8,48 @@ import wishlist from "../assets/wishlistIcon.png";
 import searchIcon from "../assets/searchIcon.png";
 import logoutIcon from "../assets/logoutIcon.png";
 import { logout } from "../features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Header = () => {
-  // Access the user data from Redux store
   const user = useSelector((state) => state.auth.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState(false); // For account dropdown
+  const [searchDropdown, setSearchDropdown] = useState(false); // For search dropdown
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-  // Close dropdown when user logs out
+  const accountDropdownRef = useRef(null);
+  const searchDropdownRef = useRef(null);
+
   useEffect(() => {
     setDropdown(false);
-  }, [user]); // Only runs when user changes (e.g., after login or logout)
+  }, [user]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if click is outside account or search dropdowns
+      if (
+        accountDropdownRef.current &&
+        !accountDropdownRef.current.contains(event.target)
+      ) {
+        setDropdown(false);
+      }
+      if (
+        searchDropdownRef.current &&
+        !searchDropdownRef.current.contains(event.target)
+      ) {
+        setSearchDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleProfile = () => {
     setDropdown((prevState) => !prevState);
@@ -31,6 +58,34 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
+  };
+
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (!query.trim()) {
+      setSearchResults([]);
+      setSearchDropdown(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/products/search`,
+        { params: { query } }
+      );
+      setSearchResults(response.data);
+      setSearchDropdown(response.data.length > 0);
+    } catch (err) {
+      console.error("Failed to search products:", err.message);
+      setSearchDropdown(false);
+    }
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+    setSearchDropdown(false);
   };
 
   return (
@@ -60,17 +115,42 @@ const Header = () => {
             <Link to={"/shop"}>Shop</Link>
             {!user && <Link to={"/login"}>Login</Link>}
           </nav>
-          <div className="flex space-x-3 items-center">
-            <form className="bg-secondary flex items-center py-2 px-3 rounded-sm">
+          <div className="flex space-x-3 items-center relative">
+            <form
+              onSubmit={(e) => e.preventDefault()} // Prevent form submission
+              className="bg-secondary flex items-center py-2 px-3 rounded-sm"
+            >
               <input
                 type="text"
                 placeholder="What are you looking for?"
+                value={searchQuery}
+                onChange={handleSearchChange}
                 className="bg-secondary w-[180px] text-[13px] text-text2 h-full focus:outline-none"
               />
               <button type="submit" className="pl-2">
                 <img src={searchIcon} alt="search" />
               </button>
             </form>
+            {searchDropdown && (
+              <div
+                ref={searchDropdownRef}
+                className="absolute top-full mt-2 w-[250px] bg-button bg-opacity-60 backdrop-blur-md py-3 rounded-md"
+              >
+                {searchResults.length > 0 ? (
+                  searchResults.map((product) => (
+                    <div
+                      key={product._id}
+                      className="flex items-center text-text p-2 hover:bg-opacity-70 cursor-pointer"
+                      onClick={() => handleProductClick(product._id)}
+                    >
+                      <span>{product.name}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-text p-2">No results found</div>
+                )}
+              </div>
+            )}
             {user && (
               <div className="relative flex space-x-3 items-center">
                 <Link to={"/user/wishlist"}>
@@ -82,13 +162,14 @@ const Header = () => {
                 <button
                   onClick={handleProfile}
                   aria-expanded={dropdown}
-                  aria-controls="dropdown-menu"
+                  aria-controls="account-dropdown-menu"
                 >
                   <img src={account} alt="account" />
                 </button>
                 {dropdown && (
                   <div
-                    id="dropdown-menu"
+                    ref={accountDropdownRef}
+                    id="account-dropdown-menu"
                     className="absolute right-0 top-full mt-2 w-[250px] bg-button bg-opacity-60 backdrop-blur-md py-3 rounded-md"
                   >
                     <Link

@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
+import Product from "./pages/Product";
 
 import { useDispatch } from "react-redux";
 import { setUser, setRole } from "./features/auth/authSlice";
@@ -18,6 +19,8 @@ import { useEffect } from "react";
 import Unauthorized from "./pages/Unauthorized";
 import UserRoutes from "./routes/UserRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
+import CategoryPage from "./pages/CategoryPage";
+import Shop from "./pages/Shop";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,6 +44,9 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/category/:id" element={<CategoryPage />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="/user" element={<UserRoutes />}>
           <Route path="profile" element={<Profile />} />
           <Route path="cart" element={<Cart />} />
