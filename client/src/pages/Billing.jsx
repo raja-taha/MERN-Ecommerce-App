@@ -253,7 +253,7 @@ const BillingComponent = () => {
             <div className="mb-5">
               <h3 className="font-semibold text-xl mb-2">Your Order</h3>
               {cartItems.map((item) => (
-                <div key={item.id} className="flex justify-between mb-2">
+                <div key={item._id} className="flex justify-between mb-2">
                   <div className="flex items-center">
                     <img
                       src={`${item.image.url}`}
