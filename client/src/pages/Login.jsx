@@ -47,7 +47,7 @@ const Login = () => {
 
   return (
     <div>
-      <div className="w-[80%] m-auto flex my-10">
+      <div className="w-[80%] m-auto flex flex-col md:flex-row my-10">
         <div>
           <img
             src={signUpPicture}
@@ -57,7 +57,7 @@ const Login = () => {
           />
         </div>
         <div className="flex flex-1 flex-col justify-center items-center">
-          <div className="w-[65%] mx-auto">
+          <div className="md:w-[65%] mx-auto my-5">
             <h1 className="text-[36px] font-inter font-medium mb-3">
               Log in to Exclusive
             </h1>
