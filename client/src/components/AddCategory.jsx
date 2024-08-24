@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AddCategory = () => {
   const [categoryName, setCategoryName] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const { token } = useSelector((state) => state.auth);
 
@@ -25,10 +24,10 @@ const AddCategory = () => {
         config
       );
 
-      setSuccessMessage(`Category '${response.data.name}' added successfully!`);
+      toast.success(`Category '${response.data.name}' added successfully!`);
       setCategoryName(""); // Reset the input field
     } catch (err) {
-      setErrorMessage(err.response.data.message || "An error occurred");
+      toast.error(err.response?.data?.message || "An error occurred");
     }
   };
 
@@ -61,10 +60,6 @@ const AddCategory = () => {
           Add Category
         </button>
       </form>
-      {successMessage && (
-        <div className="text-green-500 mt-4">{successMessage}</div>
-      )}
-      {errorMessage && <div className="text-red-500 mt-4">{errorMessage}</div>}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -14,8 +15,6 @@ const AddProduct = () => {
   });
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
 
@@ -27,7 +26,7 @@ const AddProduct = () => {
         );
         setCategories(response.data);
       } catch (err) {
-        setError(err.message);
+        toast.error(err.message);
       }
     };
 
@@ -52,8 +51,6 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
-    setSuccess(false);
 
     try {
       const formData = new FormData();
@@ -74,7 +71,7 @@ const AddProduct = () => {
         config
       );
 
-      setSuccess(true);
+      toast.success("Product added successfully!");
       setProductData({
         name: "",
         description: "",
@@ -85,7 +82,7 @@ const AddProduct = () => {
         image: null,
       });
     } catch (err) {
-      setError(err.message);
+      toast.error(err.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -185,12 +182,6 @@ const AddProduct = () => {
           >
             {loading ? "Adding Product..." : "Add Product"}
           </button>
-          <div className="flex items-center">
-            {error && <p className="text-[20px]">Error: {error}</p>}
-            {success && (
-              <p className="text-[20px]">Product added successfully!</p>
-            )}
-          </div>
         </div>
       </form>
     </div>

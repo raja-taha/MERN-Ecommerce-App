@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import signUpPicture from "../assets/signUpPicture.png";
 import { useSelector, useDispatch } from "react-redux";
 import { login, reset } from "../features/auth/authSlice";
-import SuccessMessage from "../components/SuccessMessage";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [messages, setMessages] = useState("");
 
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -29,21 +27,16 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      return;
-    }
-
     dispatch(login(formData));
   };
 
   useEffect(() => {
     if (isError) {
-      setMessages(message);
-      console.log(message);
+      toast.error(message); // Display error toast
     }
 
     if (isSuccess && user) {
-      setMessages(message);
+      toast.success(message); // Display success toast
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -71,7 +64,6 @@ const Login = () => {
             <p className="text-[16px] font-poppins mb-10">
               Enter your details below
             </p>
-            {messages && <SuccessMessage message={messages} />}
             <form onSubmit={handleSubmit} className="text-[16px] font-poppins">
               <div className="border-b-2 border-opacity-30 border-b-button focus-within:border-opacity-80 mb-5">
                 <input

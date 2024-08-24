@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import signUpPicture from "../assets/signUpPicture.png";
 import { useSelector, useDispatch } from "react-redux";
 import { register, reset } from "../features/auth/authSlice";
-import SuccessMessage from "../components/SuccessMessage";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [messages, setMessages] = useState("");
 
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -33,11 +31,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !phone || !email || !address || !password) {
-      setMessages("All fields are required.");
-      return;
-    }
-
     dispatch(register(formData));
 
     setFormData({
@@ -52,12 +45,11 @@ const Signup = () => {
 
   useEffect(() => {
     if (isError) {
-      setMessages(message);
-      console.log(message);
+      toast.error(message);
     }
 
     if (isSuccess) {
-      setMessages(message);
+      toast.success(message);
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -85,7 +77,6 @@ const Signup = () => {
             <p className="text-[16px] font-poppins mb-10">
               Enter your details below
             </p>
-            {messages && <SuccessMessage message={messages} />}
             <form onSubmit={handleSubmit} className="text-[16px] font-poppins">
               <div className="border-b-2 border-opacity-30 border-b-button focus-within:border-opacity-80 mb-5">
                 <input

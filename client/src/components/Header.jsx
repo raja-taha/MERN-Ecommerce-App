@@ -134,7 +134,7 @@ const Header = () => {
             {searchDropdown && (
               <div
                 ref={searchDropdownRef}
-                className="absolute top-full mt-2 w-[250px] bg-button bg-opacity-60 backdrop-blur-md py-3 rounded-md"
+                className="absolute top-full z-10 mt-2 w-[250px] bg-button bg-opacity-60 backdrop-blur-md py-3 rounded-md"
               >
                 {searchResults.length > 0 ? (
                   searchResults.map((product) => (
@@ -170,7 +170,7 @@ const Header = () => {
                   <div
                     ref={accountDropdownRef}
                     id="account-dropdown-menu"
-                    className="absolute right-0 top-full mt-2 w-[250px] bg-button bg-opacity-60 backdrop-blur-md py-3 rounded-md"
+                    className="absolute z-10 right-0 top-full mt-2 w-[250px] bg-button bg-opacity-60 backdrop-blur-md py-3 rounded-md"
                   >
                     <Link
                       to={"/user/profile"}
@@ -178,6 +178,13 @@ const Header = () => {
                     >
                       <img src={accountWhite} alt="profile" width={30} />
                       <span className="ml-2">Manage My Account</span>
+                    </Link>
+                    <Link
+                      to={"/user/orders"}
+                      className="flex items-center text-text p-2 hover:bg-opacity-70"
+                    >
+                      <img src={accountWhite} alt="profile" width={30} />
+                      <span className="ml-2">My Orders</span>
                     </Link>
                     <Link
                       onClick={handleLogout}

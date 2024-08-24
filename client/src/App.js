@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
+import Billing from "./pages/Billing";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import Product from "./pages/Product";
@@ -21,6 +22,10 @@ import UserRoutes from "./routes/UserRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import CategoryPage from "./pages/CategoryPage";
 import Shop from "./pages/Shop";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Orders from "./pages/Orders";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +42,17 @@ const App = () => {
   }, [dispatch]);
   return (
     <Router>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000} // Duration in milliseconds
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnHover
+        draggable
+        pauseOnFocusLos
+      />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -51,6 +67,8 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="cart" element={<Cart />} />
           <Route path="wishlist" element={<Wishlist />} />
+          <Route path="billing" element={<Billing />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
         <Route path="/admin" element={<AdminRoutes />}>
           <Route path="dashboard" element={<Dashboard />} />

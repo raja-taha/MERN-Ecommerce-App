@@ -132,7 +132,7 @@ const ViewProducts = () => {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center ml-10">
         <Spinner />
       </div>
     );

@@ -17,7 +17,9 @@ const CategoriesSection = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook for navigation
+  const [currentPage, setCurrentPage] = useState(0); // State for pagination
+  const itemsPerPage = 6; // Number of categories per page
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -37,8 +39,25 @@ const CategoriesSection = () => {
   }, []);
 
   const handleCategoryClick = (id) => {
-    navigate(`/category/${id}`); // Navigate to a page based on category ID
+    navigate(`/category/${id}`);
   };
+
+  const handleNext = () => {
+    if ((currentPage + 1) * itemsPerPage < categories.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const visibleCategories = categories.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
 
   if (loading)
     return (
@@ -60,14 +79,17 @@ const CategoriesSection = () => {
           Browse By Category
         </h2>
         <div className="flex gap-3">
-          <button>
+          <button onClick={handlePrev} disabled={currentPage === 0}>
             <img
               src={leftIcon}
               alt="left"
               className="bg-text1 bg-opacity-40 p-2 rounded-full"
             />
           </button>
-          <button>
+          <button
+            onClick={handleNext}
+            disabled={(currentPage + 1) * itemsPerPage >= categories.length}
+          >
             <img
               src={rightIcon}
               alt="right"
@@ -77,14 +99,14 @@ const CategoriesSection = () => {
         </div>
       </div>
       <div>
-        {categories.length === 0 ? (
+        {visibleCategories.length === 0 ? (
           <p>No categories available</p>
         ) : (
           <div className="grid grid-cols-6 gap-3">
-            {categories.map((category) => (
+            {visibleCategories.map((category) => (
               <button
                 key={category._id}
-                className="w-[150px] h-[150px] text-[20px] font-poppins font-bold border-2 border-opacity-30 border-button hover:border-secondary2 hover:text-text hover:bg-secondary2"
+                className="w-[150px] h-[150px] text-[20px] font-poppins font-bold shadow-md border-2 border-opacity-30 border-button hover:border-secondary2 hover:text-text hover:bg-secondary2"
                 onClick={() => handleCategoryClick(category._id)}
               >
                 {capitalizeWords(category.name)}

@@ -53,7 +53,7 @@ const Shop = () => {
         </div>
       </div>
       <div className="main-content flex-1 p-4 w-[80%] mx-4">
-        <ProductsSection filterCategory={selectedCategory} limit={0} />
+        <ProductsSection filterCategory={selectedCategory} shop />
       </div>
     </div>
   );
