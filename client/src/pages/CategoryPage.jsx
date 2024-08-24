@@ -56,7 +56,7 @@ const CategoryPage = () => {
       <h2 className="text-[30px] font-poppins font-semibold my-3">
         {`${capitalizeWords(categoryName)}s`}
       </h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.length === 0 ? (
           <p>No products available in this category</p>
         ) : (

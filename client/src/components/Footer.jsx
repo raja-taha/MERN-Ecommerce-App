@@ -14,7 +14,7 @@ const Footer = () => {
   return (
     <footer className="bg-button ">
       <div className=" w-[80%] mx-auto pt-20 ">
-        <div className="flex justify-between font-poppins text-text text-[16px]">
+        <div className="flex flex-col md:flex-row md:justify-between font-poppins text-text text-[16px]">
           <div className="flex flex-col gap-3">
             <h2 className="font-inter text-[24px] font-bold mb-6">Exclusive</h2>
             <h3 className="text-[20px] font-medium mb-3">Subscribe</h3>
@@ -30,6 +30,7 @@ const Footer = () => {
               </button>
             </form>
           </div>
+          <hr className="md:hidden my-10  text-text " />
           <div className="flex flex-col gap-3">
             <h3 className="text-[20px] font-medium mb-6">Support</h3>
             <p className="mb-2">
@@ -48,6 +49,7 @@ const Footer = () => {
               <a href="tel:+923480105269">+92-348-0105269</a>
             </p>
           </div>
+          <hr className="md:hidden my-10  text-text " />
           <div className="flex flex-col gap-3">
             <h3 className="text-[20px] font-medium mb-6">Account</h3>
             <div className=" flex flex-col">
@@ -68,6 +70,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
+          <hr className="md:hidden my-10  text-text " />
           <div className="flex flex-col gap-3">
             <h3 className="text-[20px] font-medium mb-6">Quick Links</h3>
             <div className=" flex flex-col">
@@ -85,17 +88,20 @@ const Footer = () => {
               </Link>
             </div>
           </div>
+          <hr className="md:hidden my-10  text-text " />
           <div className="flex flex-col gap-3">
             <h3 className="text-[20px] font-medium mb-6">Download App</h3>
-            <p className="text-[11px]">Save $3 with App New User Only</p>
-            <div className="flex gap-2 mt-2">
+            <p className="text-[16px] md:text-[11px]">
+              Save $3 with App New User Only
+            </p>
+            <div className="flex gap-2 mt-2 ">
               <img src={qrcode} alt="qrcode" />
               <div className="flex flex-col gap-2">
                 <img src={playStore} alt="play store" />
                 <img src={appStore} alt="app store" />
               </div>
             </div>
-            <div className="flex gap-8 mt-3">
+            <div className="flex gap-8 mt-3 justify-center ">
               <a
                 href="https://www.facebook.com/rajataha062"
                 target="_blank"

@@ -52,7 +52,7 @@ const Wishlist = () => {
         <p className="text-[20px] font-inter my-10">Your wishlist is empty.</p>
       ) : (
         <div className="my-10">
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {wishlistItems.map((item) => (
               <Product
                 key={item._id}

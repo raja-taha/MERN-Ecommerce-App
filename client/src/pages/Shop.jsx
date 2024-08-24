@@ -22,10 +22,10 @@ const Shop = () => {
   }, []);
 
   return (
-    <div className="flex w-[80%] mx-auto">
-      <div className="my-10 w-[20%] border-r-2 p-4">
+    <div className="flex flex-col lg:flex-row w-[80%] mx-auto">
+      <div className="mt-4 lg:my-10 lg:w-[20%] lg:border-r-2 p-4">
         <h2 className="text-[24px] font-poppins font-bold">Categories</h2>
-        <div className="flex flex-col justify-start items-start mt-6">
+        <div className="flex flex-wrap gap-3 lg:gap-0 lg:flex-col justify-start items-start mt-6">
           {/* "All" button */}
           <button
             className={`my-2 hover:underline ${
@@ -52,7 +52,7 @@ const Shop = () => {
           ))}
         </div>
       </div>
-      <div className="main-content flex-1 p-4 w-[80%] mx-4">
+      <div className="main-content flex-1 mb-5 lg:p-4 lg:w-[80%] lg:mx-4">
         <ProductsSection filterCategory={selectedCategory} shop />
       </div>
     </div>

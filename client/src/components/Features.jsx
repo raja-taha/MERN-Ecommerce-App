@@ -6,7 +6,7 @@ import securityIcon from "../assets/securityIcon.png";
 
 const Features = () => {
   return (
-    <div className="flex justify-center items-center font-poppins space-x-20 mt-10 mb-20">
+    <div className="flex flex-col gap-20 md:gap-4 lg:gap-20 md:flex-row justify-center items-center font-poppins  mt-10 mb-20">
       <div className="flex flex-col justify-center items-center">
         <div className="relative w-[70px] ">
           <img

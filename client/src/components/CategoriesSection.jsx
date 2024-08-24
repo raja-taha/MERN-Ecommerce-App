@@ -18,7 +18,7 @@ const CategoriesSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(0); // State for pagination
-  const itemsPerPage = 6; // Number of categories per page
+  const [itemsPerPage, setItemsPerPage] = useState(6); // Default to 6 items per page
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,6 +36,26 @@ const CategoriesSection = () => {
     };
 
     fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        // Example breakpoint for small screens
+        setItemsPerPage(2);
+      } else if (window.innerWidth < 1200) {
+        setItemsPerPage(4);
+      } else {
+        setItemsPerPage(6);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const handleCategoryClick = (id) => {
@@ -75,7 +95,7 @@ const CategoriesSection = () => {
         </span>
       </h3>
       <div className="flex justify-between items-center">
-        <h2 className="text-[36px] font-inter font-semibold my-3">
+        <h2 className="text-[24px] md:text-[36px] font-inter font-semibold my-3">
           Browse By Category
         </h2>
         <div className="flex gap-3">
@@ -102,7 +122,7 @@ const CategoriesSection = () => {
         {visibleCategories.length === 0 ? (
           <p>No categories available</p>
         ) : (
-          <div className="grid grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {visibleCategories.map((category) => (
               <button
                 key={category._id}

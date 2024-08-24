@@ -60,7 +60,9 @@ const ProductsSection = ({ limit = 0, product, shop, filterCategory = "" }) => {
         <div className="flex justify-between items-center">
           <h2
             className={`font-inter font-semibold my-3 ${
-              shop ? "text-[24px] mt-10" : "text-[36px]"
+              shop
+                ? "text-[20px] md:text-[24px] mt-10"
+                : "text-[24px] md:text-[36px]"
             }`}
           >
             Explore Our Products
@@ -72,7 +74,7 @@ const ProductsSection = ({ limit = 0, product, shop, filterCategory = "" }) => {
         {displayedProducts.length === 0 ? (
           <p>No products available</p>
         ) : (
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {displayedProducts.map((product) => (
               <Product key={product._id} product={product} />
             ))}

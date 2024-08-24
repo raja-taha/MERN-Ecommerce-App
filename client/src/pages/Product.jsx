@@ -43,16 +43,16 @@ const Product = () => {
   return (
     <div className="w-[80%] mx-auto">
       {product && (
-        <div className="flex py-10">
+        <div className="flex flex-col lg::flex-row py-10">
           <div className="flex flex-1">
             <img
               src={product.image.url}
               alt={product.name}
-              className="w-full object-cover mb-4 rounded-sm border-2 border-button border-opacity-30"
+              className="w-full object-cover mb-4 rounded-sm lg:border-2 border-button border-opacity-30"
             />
           </div>
           <div className="flex flex-1 flex-col">
-            <div className="w-[60%] mx-auto">
+            <div className="lg:w-[60%] mx-auto">
               <h1 className="text-[24px] font-semibold font-inter">
                 {product.name}
               </h1>
@@ -82,8 +82,8 @@ const Product = () => {
                   <img src={heartIcon} alt="wishlist" width={30} />
                 </button>
               </div>
-              <div className="my-10">
-                <div className="flex border-2 border-button border-opacity-30">
+              <div className="my-10 ">
+                <div className="flex border-2 border-button border-opacity-30 pr-3 lg:pr-0">
                   <img src={deliveryIconWhite} alt="delivery" className="m-4" />
                   <div className="flex flex-col justify-center items-start">
                     <p className="text-[16px] font-medium">Free Delivery</p>
@@ -92,7 +92,7 @@ const Product = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex border-2 border-button border-opacity-30 border-t-0">
+                <div className="flex border-2 border-button border-opacity-30 border-t-0 pr-3 lg:pr-0">
                   <img src={returnIcon} alt="return" className="m-4" />
                   <div className="flex flex-col justify-center items-start">
                     <p className="text-[16px] font-medium">Return Delivery</p>
