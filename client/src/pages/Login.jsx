@@ -52,8 +52,7 @@ const Login = () => {
           <img
             src={signUpPicture}
             alt="login"
-            width={700}
-            className="rounded-sm"
+            className="rounded-sm md:w-[400px] lg:w-[700px]"
           />
         </div>
         <div className="flex flex-1 flex-col justify-center items-center">

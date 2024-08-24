@@ -82,7 +82,7 @@ const Cart = () => {
               key={product._id}
               className="grid grid-cols-1 md:grid-cols-5  gap-4 px-10 py-4 text-[16px] font-poppins border-2 border-button border-opacity-30 rounded-md shadow-md my-5"
             >
-              <div className="flex gap-10 md:gap-0 items-center">
+              <div className="flex gap-5 sm:gap-10 md:gap-0 items-center">
                 <p className="md:hidden font-semibold">Product</p>
                 <img
                   src={product.image.url}
@@ -91,11 +91,11 @@ const Cart = () => {
                 />
                 <span className="ml-4">{product.name}</span>
               </div>
-              <div className="flex gap-10 items-center">
+              <div className="flex gap-5 sm:gap-10 items-center">
                 <p className="md:hidden font-semibold">Price</p>
                 <span>${product.price}</span>
               </div>
-              <div className="flex gap-10 items-center ">
+              <div className="flex gap-5 sm:gap-10 items-center ">
                 <p className="md:hidden font-semibold">Quantity</p>
                 <div className="border-t border-b border-gray-300 rounded">
                   <button
@@ -118,7 +118,7 @@ const Cart = () => {
                   </button>
                 </div>
               </div>
-              <div className="flex gap-10 items-center">
+              <div className="flex gap-5 sm:gap-10 items-center">
                 <p className="md:hidden font-semibold">Subtotal</p>
                 <span>${product.price * product.quantity}</span>
               </div>

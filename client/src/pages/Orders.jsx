@@ -70,11 +70,11 @@ const Orders = () => {
         <div className="space-y-4">
           {orders.map((order) => (
             <div key={order._id} className="border p-4 rounded text-[16px]">
-              <h3 className="font-semibold text-[20px] mb-2">
+              <h3 className="font-semibold text-[16px] md:text-[20px] mb-2">
                 Order #{order._id}
               </h3>
-              <div className="grid  grid-cols-2">
-                <div className="border-r">
+              <div className="grid  grid-cols-1 md:grid-cols-2">
+                <div className="border-b md:border-r md:border-b-0">
                   <div className="mb-4">
                     <h4 className="font-medium">Customer Details</h4>
                     <p>Name: {order.customerDetails.firstName}</p>
@@ -108,7 +108,7 @@ const Orders = () => {
                     )}
                   </div>
                 </div>
-                <div className="ml-5">
+                <div className="md:ml-5">
                   <div className="mb-4">
                     <h4 className="font-medium">Order Items</h4>
                     <div className="grid grid-cols-3 space-x-4">

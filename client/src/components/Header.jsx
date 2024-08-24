@@ -67,8 +67,8 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
     handleCloseMenu(); // Close the menu
+    navigate("/login");
   };
 
   const handleSearchChange = async (e) => {
@@ -125,11 +125,23 @@ const Header = () => {
             Exclusive
           </Link>
           <nav className="hidden md:flex justify-center items-center font-poppins text-[16px] space-x-10">
-            <Link to={"/"}>Home</Link>
-            <Link to={"/contact"}>Contact</Link>
-            <Link to={"/about"}>About</Link>
-            <Link to={"/shop"}>Shop</Link>
-            {!user && <Link to={"/login"}>Login</Link>}
+            <Link to={"/"} onClick={handleCloseMenu}>
+              Home
+            </Link>
+            <Link to={"/contact"} onClick={handleCloseMenu}>
+              Contact
+            </Link>
+            <Link to={"/about"} onClick={handleCloseMenu}>
+              About
+            </Link>
+            <Link to={"/shop"} onClick={handleCloseMenu}>
+              Shop
+            </Link>
+            {!user && (
+              <Link to={"/login"} onClick={handleCloseMenu}>
+                Login
+              </Link>
+            )}
             <div className="flex space-x-3 items-center relative">
               <form
                 onSubmit={(e) => e.preventDefault()} // Prevent form submission
@@ -168,10 +180,10 @@ const Header = () => {
               )}
               {user && (
                 <div className="relative flex space-x-3 items-center">
-                  <Link to={"/user/wishlist"}>
+                  <Link to={"/user/wishlist"} onClick={handleCloseMenu}>
                     <img src={wishlist} alt="wishlist" />
                   </Link>
-                  <Link to={"/user/cart"}>
+                  <Link to={"/user/cart"} onClick={handleCloseMenu}>
                     <img src={cart} alt="cart" />
                   </Link>
                   <button
@@ -189,6 +201,7 @@ const Header = () => {
                     >
                       <Link
                         to={"/user/profile"}
+                        onClick={handleCloseMenu}
                         className="flex items-center text-text p-2 hover:bg-opacity-70"
                       >
                         <img src={accountWhite} alt="profile" width={30} />
@@ -196,6 +209,7 @@ const Header = () => {
                       </Link>
                       <Link
                         to={"/user/orders"}
+                        onClick={handleCloseMenu}
                         className="flex items-center text-text p-2 hover:bg-opacity-70"
                       >
                         <img src={accountWhite} alt="profile" width={30} />
@@ -314,10 +328,10 @@ const Header = () => {
 
                   {user && (
                     <div className="relative flex justify-center space-x-4 py-5">
-                      <Link to={"/user/wishlist"}>
+                      <Link to={"/user/wishlist"} onClick={handleCloseMenu}>
                         <img src={wishlist} alt="wishlist" />
                       </Link>
-                      <Link to={"/user/cart"}>
+                      <Link to={"/user/cart"} onClick={handleCloseMenu}>
                         <img src={cart} alt="cart" />
                       </Link>
                       <button
@@ -335,6 +349,7 @@ const Header = () => {
                         >
                           <Link
                             to={"/user/profile"}
+                            onClick={handleCloseMenu}
                             className="flex items-center text-text p-2 hover:bg-opacity-70"
                           >
                             <img src={accountWhite} alt="profile" width={30} />
@@ -342,6 +357,7 @@ const Header = () => {
                           </Link>
                           <Link
                             to={"/user/orders"}
+                            onClick={handleCloseMenu}
                             className="flex items-center text-text p-2 hover:bg-opacity-70"
                           >
                             <img src={accountWhite} alt="profile" width={30} />
