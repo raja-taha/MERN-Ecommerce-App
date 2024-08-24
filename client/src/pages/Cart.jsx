@@ -142,11 +142,11 @@ const Cart = () => {
               >
                 Return To Shop
               </Link>
-              <div className="flex">
+              <div className="flex gap-1 flex-col md:flex-row">
                 <input
                   type="text"
                   placeholder="Coupon Code"
-                  className="border focus:outline-secondary2 p-1 md:p-2 rounded mr-2 text-[16px] font-poppins"
+                  className="w-full border focus:outline-secondary2 p-1 md:p-2 rounded mr-2 text-[16px] font-poppins"
                 />
                 <button className="bg-button2 text-text p-1 md:p-2 text-[16px] font-medium font-poppins rounded hover:bg-hoverButton">
                   Apply Coupon
