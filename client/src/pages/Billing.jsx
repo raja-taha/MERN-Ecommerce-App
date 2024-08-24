@@ -141,7 +141,7 @@ const BillingComponent = () => {
       {cartItems.length === 0 ? (
         <div className="flex flex-col space-y-16 justify-center items-center my-28">
           <div className="flex flex-col justify-center items-center">
-            <p className="text-[110px] font-inter font-medium tracking-wider">
+            <p className="text-[30px] md:text-[80px] lg:text-[110px]  font-inter font-medium tracking-wider">
               Empty Cart
             </p>
             <p className="font-poppins text-[16px]">
@@ -151,8 +151,8 @@ const BillingComponent = () => {
           <Button text="Back to shop" href="/shop" />
         </div>
       ) : (
-        <div className="flex justify-between my-10">
-          <div className="w-1/2">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-between my-10">
+          <div className="">
             <div className="space-y-4">
               {/* Customer Details Form */}
               <div className="space-y-4">
@@ -248,7 +248,7 @@ const BillingComponent = () => {
           </div>
 
           {/* Order Summary and Payment */}
-          <div className="w-1/2 p-5">
+          <div className="py-5 md:px-5">
             {/* Order Summary */}
             <div className="mb-5">
               <h3 className="font-semibold text-xl mb-2">Your Order</h3>

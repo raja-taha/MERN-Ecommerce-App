@@ -42,10 +42,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex w-[80%] mx-auto">
-      <div className=" my-10 w-[20%] border-r-2">
+    <div className="flex flex-col md:flex-row w-[80%] mx-auto">
+      <div className=" my-10 md:w-[20%] md:border-r-2">
         <h2 className=" text-[24px] font-poppins font-bold">Menu</h2>
-        <div className="flex flex-col justify-start items-start mt-6">
+        <div className="flex flex-wrap md:flex-col gap-5 md:gap-0 justify-start items-start mt-6">
           {Object.keys(buttons).map((key) => (
             <button
               key={key}
@@ -57,7 +57,7 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-      <div className="main-content flex-1 p-4">{renderContent()}</div>
+      <div className="flex-1 p-4">{renderContent()}</div>
     </div>
   );
 };

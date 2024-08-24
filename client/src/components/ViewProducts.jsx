@@ -146,11 +146,11 @@ const ViewProducts = () => {
       {products.length === 0 ? (
         <p>No products available</p>
       ) : (
-        <div className="flex flex-wrap gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {products.map((product) => (
             <div
               key={product._id}
-              className="flex flex-col justify-between bg-secondary text-[18px] text-text2 my-1 p-5 w-[calc(50%-0.375rem)] rounded-lg"
+              className="flex flex-col justify-between bg-secondary text-[18px] text-text2 my-1 p-5  rounded-lg"
             >
               <div className="flex flex-col flex-1 gap-3">
                 <p>

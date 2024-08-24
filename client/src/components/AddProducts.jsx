@@ -93,7 +93,7 @@ const AddProduct = () => {
       <h2 className="text-[24px] font-poppins font-bold my-6 text-secondary2">
         Add Product
       </h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-[80%]">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:w-[80%]">
         <div>
           <label className="font-medium text-[18px]">Name:</label>
           <input

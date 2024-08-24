@@ -100,7 +100,7 @@ const ViewCategories = () => {
           {categories.map((category) => (
             <div
               key={category._id}
-              className="flex justify-between bg-secondary text-[18px] text-text2 my-3 p-2 w-[80%]"
+              className="flex justify-between bg-secondary text-[18px] text-text2 my-3 p-2 md:w-[80%]"
             >
               <div className="flex flex-col flex-1 gap-3">
                 <p>
