@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react"; // Import useState
+import axios from "axios"; // Import axios for HTTP requests
 import copyrightIcon from "../assets/copyrightIcon.png";
 import qrcode from "../assets/qrcode.png";
 import playStore from "../assets/playStore.png";
@@ -9,8 +10,35 @@ import twitterIcon from "../assets/twitterIcon.png";
 import linkedinIcon from "../assets/linkedinIcon.png";
 import sendIcon from "../assets/sendIcon.png";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    try {
+      // Send POST request to your backend API
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/subscribe`,
+        { email }
+      );
+
+      // Handle successful response
+      if (response.status === 200) {
+        toast.success("Subscribed successfully!");
+        setEmail(""); // Clear the input field
+      }
+    } catch (error) {
+      // Check if the error response has a specific message
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Subscription failed. Please try again.");
+      }
+    }
+  };
+
   return (
     <footer className="bg-button ">
       <div className=" w-[80%] mx-auto pt-20 ">
@@ -19,11 +47,17 @@ const Footer = () => {
             <h2 className="font-inter text-[24px] font-bold mb-6">Exclusive</h2>
             <h3 className="text-[20px] font-medium mb-3">Subscribe</h3>
             <p>Get 10% off your first order</p>
-            <form className="border-2 border-text flex justify-around items-center py-2 rounded-sm">
+            <form
+              className="border-2 border-text flex justify-around items-center py-2 rounded-sm"
+              onSubmit={handleSubscribe} // Handle form submission
+            >
               <input
                 type="text"
                 placeholder="Enter your email"
+                required
                 className="bg-button mx-2 w-[150px] text-[13px] h-full focus:outline-none"
+                value={email} // Bind state to input
+                onChange={(e) => setEmail(e.target.value)} // Update state on change
               />
               <button type="submit" className="bg-button pr-4">
                 <img src={sendIcon} alt="send" />

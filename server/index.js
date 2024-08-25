@@ -6,6 +6,8 @@ const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const subscribeRoute = require("./routes/subscribeRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
 
@@ -36,6 +38,8 @@ app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
+app.use("/subscribe", subscribeRoute);
+app.use("/contact", contactRoutes);
 
 connectDB();
 
