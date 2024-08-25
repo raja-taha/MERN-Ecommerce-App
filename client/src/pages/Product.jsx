@@ -43,12 +43,12 @@ const Product = () => {
   return (
     <div className="w-[80%] mx-auto">
       {product && (
-        <div className="flex flex-col lg::flex-row py-10">
+        <div className="flex flex-col lg:flex-row py-10">
           <div className="flex flex-1">
             <img
               src={product.image.url}
               alt={product.name}
-              className="w-full object-cover mb-4 rounded-sm lg:border-2 border-button border-opacity-30"
+              className="w-full object-contain mb-4 rounded-sm "
             />
           </div>
           <div className="flex flex-1 flex-col">

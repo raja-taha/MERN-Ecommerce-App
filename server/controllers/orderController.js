@@ -1,4 +1,5 @@
 const Order = require("../models/orderModel");
+const Product = require("../models/productModel");
 
 // Create a new order
 exports.createOrder = async (req, res) => {
@@ -21,6 +22,16 @@ exports.createOrder = async (req, res) => {
 
     // Save the order to the database
     const savedOrder = await newOrder.save();
+
+    // Update stock and sales for each product in the order
+    for (const item of orderItems) {
+      const product = await Product.findById(item.id);
+      if (product) {
+        product.stock -= item.quantity; // Decrease stock by the ordered quantity
+        product.sales += item.quantity; // Increase sales by the ordered quantity
+        await product.save();
+      }
+    }
 
     res.status(201).json({
       success: true,

@@ -1,4 +1,5 @@
 const Category = require("../models/categoryModel");
+const Product = require("../models/productModel");
 
 // @desc    Create a new category
 // @route   POST /api/categories
@@ -73,20 +74,26 @@ const updateCategory = async (req, res) => {
   }
 };
 
-// @desc    Delete a category
+// @desc    Delete a category and all associated products
 // @route   DELETE /api/categories/:id
 // @access  Private/Admin
 const deleteCategory = async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
-    console.log(category);
 
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
     }
 
+    // Delete all products associated with this category
+    await Product.deleteMany({ category: category._id });
+
+    // Delete the category
     await category.deleteOne();
-    res.status(200).json({ message: "Category deleted successfully" });
+
+    res.status(200).json({
+      message: "Category and all associated products deleted successfully",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

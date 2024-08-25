@@ -22,7 +22,7 @@ const Cart = () => {
       );
       const product = response.data;
 
-      if (product.stock > quantity) {
+      if (product.stock >= quantity) {
         const updatedCart = cart.map((item) =>
           item._id === productId ? { ...item, quantity } : item
         );

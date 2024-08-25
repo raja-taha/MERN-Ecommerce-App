@@ -22,7 +22,8 @@ const Product = ({ product, wishlist, onRemove }) => {
           <img
             src={image.url}
             alt={name}
-            className="w-48 object-cover rounded-lg mb-4 mx-auto"
+            className="w-48 object-cover rounded-lg mb-4 mx-auto hover:cursor-pointer"
+            onClick={handleViewProduct}
           />
         ) : (
           <div className="w-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
