@@ -45,7 +45,9 @@ const Contact = () => {
               <h3 className="text-[16px] font-medium">Call To Us</h3>
             </div>
             <p className="text-[14px]">We are available 24/7, 7 days a week.</p>
-            <p className="text-[14px]">Phone: +8801611112222</p>
+            <p className="text-[14px]">
+              Phone: <a href="tel:+923480105269">+923480105269</a>
+            </p>
           </div>
           <hr className="mt-10 mb-10 opacity-30 text-button " />
           <div className="flex flex-col gap-4">
@@ -56,8 +58,12 @@ const Contact = () => {
             <p className="text-[14px]">
               Fill out our form and we will contact you within 24 hours.
             </p>
-            <p className="text-[14px]">Emails: customer@exclusive.com</p>
-            <p className="text-[14px]">Emails: support@exclusive.com</p>
+            <p className="text-[14px]">
+              <a href="mailto:rajataha062@gmail.com">rajataha062@gmail.com</a>
+            </p>
+            <p className="text-[14px]">
+              <a href="mailto:rmtaha062@gmail.com">rmtaha062@gmail.com</a>
+            </p>
           </div>
         </div>
         <div className="md:w-2/3 p-5 md:p-10 border border-button border-opacity-30">
